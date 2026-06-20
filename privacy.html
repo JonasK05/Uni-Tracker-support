@@ -1,22 +1,312 @@
-Datenschutz — Uni Tracker
-Stand: Juni 2026
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutz — Uni Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F7F5F0;
+    --paper-raised: #FFFFFF;
+    --ink: #1C2333;
+    --slate: #5C6478;
+    --seal: #A8793A;
+    --forest: #3B6B52;
+    --hairline: #DEDAD0;
+  }
 
-Deine Daten gehören dir
-Uni Tracker wurde so entwickelt, dass deine Daten ausschließlich bei dir bleiben. Die App benötigt keinen Account, keine Registrierung und stellt keine Verbindung zu externen Servern her.
+  *{ box-sizing: border-box; }
 
-Was die App speichert
-Alle Daten, die du in Uni Tracker eingibst — Prüfungen, Noten, ECTS-Punkte, Modulgruppen, Studiengang und Einstellungen — werden ausschließlich lokal auf deinem Gerät gespeichert. Der Entwickler hat zu keinem Zeitpunkt Zugriff auf diese Daten.
+  html{ scroll-behavior: smooth; }
 
-iCloud-Synchronisation
-Wenn du auf deinem Gerät mit einer Apple ID angemeldet bist und iCloud aktiviert hast, synchronisiert Uni Tracker deine Daten automatisch auf alle deine Apple-Geräte. Die Übertragung erfolgt verschlüsselt über Apples iCloud-Infrastruktur. Auch in diesem Fall hat der Entwickler keinen Zugriff auf deine Daten.
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-Du kannst die iCloud-Synchronisation jederzeit unter Einstellungen → [dein Name] → iCloud → Uni Tracker deaktivieren.
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+  }
 
-Benachrichtigungen
-Wenn du Prüfungserinnerungen aktivierst, werden die Benachrichtigungen vollständig auf deinem Gerät erstellt und versendet. Es gibt keinen externen Push-Server. Deine Prüfungsdaten verlassen dabei dein Gerät nicht.
+  /* ---------- Header ---------- */
 
-Keine Weitergabe, keine Analyse, keine Werbung
-Uni Tracker enthält keine Analyse-Tools, keine Werbenetzwerke und keine Drittanbieter-Dienste, die Daten sammeln. Es werden keinerlei Nutzungsdaten erhoben oder weitergegeben.
+  header{
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out forwards;
+  }
 
-Löschen deiner Daten
-Du kannst einzelne Einträge jederzeit direkt in der App löschen. Alle Daten werden vollständig entfernt, wenn du die App deinstallierst.
+  @keyframes fadeUp{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    header{ animation: none; opacity: 1; }
+  }
+
+  .eyebrow{
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-bottom: 0.9rem;
+  }
+
+  h1{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle{
+    color: var(--slate);
+    font-size: 1.05rem;
+    margin: 0 0 2.2rem;
+  }
+
+  .stand{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--slate);
+  }
+
+  /* ---------- Signature icon + badges ---------- */
+
+  .signature{
+    display: flex;
+    justify-content: center;
+    margin: 1.8rem 0 1.6rem;
+  }
+
+  .signature svg{
+    width: 150px;
+    height: auto;
+  }
+
+  .badges{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .badge{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+    background: rgba(59, 107, 82, 0.08);
+    border: 1px solid rgba(59, 107, 82, 0.25);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+  }
+
+  /* ---------- Sections ---------- */
+
+  section{
+    padding: 2.4rem 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  section:first-of-type{
+    border-top: 1px solid var(--hairline);
+  }
+
+  .section-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-bottom: 0.8rem;
+  }
+
+  h2{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0 0 0.8rem;
+  }
+
+  p{
+    margin: 0 0 0.9rem;
+    color: var(--ink);
+  }
+
+  p:last-child{ margin-bottom: 0; }
+
+  .path{
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    color: var(--slate);
+    margin-top: 0.4rem;
+  }
+
+  .none-list{
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .none-list li{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--slate);
+  }
+
+  .none-list .mark{
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--slate);
+    position: relative;
+  }
+
+  .none-list .mark::after{
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 50%;
+    height: 1.5px;
+    background: var(--slate);
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
+    text-align: center;
+    color: var(--slate);
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 480px){
+    .wrap{ padding: 3.2rem 1.2rem 3rem; }
+    h1{ font-size: 1.9rem; }
+    .signature svg{ width: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Datenschutzerklärung</span>
+    <h1>Uni Tracker</h1>
+    <p class="subtitle">Deine Daten gehören dir.</p>
+
+    <div class="signature" aria-hidden="true">
+      <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- phone -->
+        <rect x="14" y="14" width="46" height="62" rx="7" stroke="#1C2333" stroke-width="2"/>
+        <line x1="28" y1="64" x2="46" y2="64" stroke="#1C2333" stroke-width="2" stroke-linecap="round"/>
+        <!-- lock on phone -->
+        <rect x="29" y="34" width="16" height="13" rx="2.5" stroke="#A8793A" stroke-width="2"/>
+        <path d="M32 34v-4a5 5 0 0 1 10 0v4" stroke="#A8793A" stroke-width="2"/>
+        <!-- broken connection -->
+        <line x1="66" y1="45" x2="84" y2="45" stroke="#5C6478" stroke-width="2" stroke-dasharray="4 5"/>
+        <line x1="86" y1="36" x2="98" y2="54" stroke="#3B6B52" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="98" y1="36" x2="86" y2="54" stroke="#3B6B52" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- server -->
+        <rect x="108" y="18" width="38" height="14" rx="2.5" stroke="#5C6478" stroke-width="1.6"/>
+        <rect x="108" y="36" width="38" height="14" rx="2.5" stroke="#5C6478" stroke-width="1.6"/>
+        <rect x="108" y="54" width="38" height="14" rx="2.5" stroke="#5C6478" stroke-width="1.6"/>
+        <circle cx="114" cy="25" r="1.6" fill="#5C6478"/>
+        <circle cx="114" cy="43" r="1.6" fill="#5C6478"/>
+        <circle cx="114" cy="61" r="1.6" fill="#5C6478"/>
+      </svg>
+    </div>
+
+    <div class="badges">
+      <span class="badge">Kein Account</span>
+      <span class="badge">Kein Server</span>
+      <span class="badge">Keine Werbung</span>
+    </div>
+
+    <p class="stand">Stand: Juni 2026</p>
+  </header>
+
+  <section>
+    <div class="section-label">Übersicht</div>
+    <h2>Alles bleibt bei dir</h2>
+    <p>Uni&nbsp;Tracker wurde so entwickelt, dass deine Daten ausschließlich bei dir bleiben. Die App benötigt keinen Account, keine Registrierung und stellt keine Verbindung zu externen Servern her.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Speicherung</div>
+    <h2>Was die App speichert</h2>
+    <p>Alle Daten, die du in Uni&nbsp;Tracker eingibst — Prüfungen, Noten, ECTS-Punkte, Modulgruppen, Studiengang und Einstellungen — werden ausschließlich lokal auf deinem Gerät gespeichert. Der Entwickler hat zu keinem Zeitpunkt Zugriff auf diese Daten.</p>
+  </section>
+
+  <section>
+    <div class="section-label">iCloud-Synchronisation</div>
+    <h2>Synchronisation zwischen deinen Geräten</h2>
+    <p>Wenn du auf deinem Gerät mit einer Apple&nbsp;ID angemeldet bist und iCloud aktiviert hast, synchronisiert Uni&nbsp;Tracker deine Daten automatisch auf alle deine Apple-Geräte. Die Übertragung erfolgt verschlüsselt über Apples iCloud-Infrastruktur. Auch in diesem Fall hat der Entwickler keinen Zugriff auf deine Daten.</p>
+    <p>Du kannst die Synchronisation jederzeit deaktivieren unter:</p>
+    <span class="path">Einstellungen → [dein Name] → iCloud → Uni Tracker</span>
+  </section>
+
+  <section>
+    <div class="section-label">Benachrichtigungen</div>
+    <h2>Prüfungserinnerungen</h2>
+    <p>Wenn du Prüfungserinnerungen aktivierst, werden die Benachrichtigungen vollständig auf deinem Gerät erstellt und versendet. Es gibt keinen externen Push-Server — deine Prüfungsdaten verlassen dabei dein Gerät nicht.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Keine Weitergabe</div>
+    <h2>Keine Analyse, keine Werbung</h2>
+    <p>Uni&nbsp;Tracker enthält keine Analyse-Tools, keine Werbenetzwerke und keine Drittanbieter-Dienste, die Daten sammeln. Es werden keinerlei Nutzungsdaten erhoben oder weitergegeben.</p>
+    <ul class="none-list">
+      <li><span class="mark"></span> Analyse-Tools</li>
+      <li><span class="mark"></span> Werbenetzwerke</li>
+      <li><span class="mark"></span> Drittanbieter-Dienste</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-label">Löschen</div>
+    <h2>Löschen deiner Daten</h2>
+    <p>Du kannst einzelne Einträge jederzeit direkt in der App löschen. Alle Daten werden vollständig entfernt, wenn du die App deinstallierst.</p>
+  </section>
+
+  <footer>
+    Uni Tracker · Datenschutzerklärung · Juni 2026
+  </footer>
+
+</div>
+
+</body>
+</html>
