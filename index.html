@@ -66,7 +66,7 @@
 
   .tabs{
     position: relative;
-    display: inline-flex;
+    display: flex;
     background: var(--surface);
     border-radius: 980px;
     padding: 4px;
@@ -92,6 +92,12 @@
   .tab-btn{
     position: relative;
     z-index: 1;
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
     border: none;
     background: transparent;
     font: inherit;
@@ -356,9 +362,9 @@
 
 <section class="hero">
   <span class="eyebrow">Uni Tracker</span>
-  <h1>Hilfe &amp; Datenschutz</h1>
-  <p class="hero-sub">Alles, was du über Support und den Umgang mit deinen Daten wissen musst — an einem Ort.</p>
-  <div class="badges">
+  <h1 id="hero-title">Support</h1>
+  <p class="hero-sub" id="hero-sub">Bei Fragen oder Problemen erreichst du mich über einen der folgenden Kanäle.</p>
+  <div class="badges" id="hero-badges">
     <span class="badge">Kein Account</span>
     <span class="badge">Kein Server</span>
     <span class="badge">Keine Werbung</span>
@@ -487,48 +493,89 @@
 </footer>
 
 <script>
+(function(){
   const tabsEl = document.getElementById('tabs');
   const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
   const panels = Array.from(document.querySelectorAll('.panel'));
 
+  // Reveal-on-scroll for cards (with fallback if IntersectionObserver is unavailable)
+  const supportsObserver = 'IntersectionObserver' in window;
+  const observer = supportsObserver
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 })
+    : null;
+
+  function revealCards(){
+    document.querySelectorAll('.panel:not([hidden]) .card').forEach(card => {
+      if(observer){
+        observer.observe(card);
+      } else {
+        card.classList.add('visible');
+      }
+    });
+  }
+
+  const heroContent = {
+    support: {
+      title: 'Support',
+      sub: 'Bei Fragen oder Problemen erreichst du mich über einen der folgenden Kanäle.'
+    },
+    privacy: {
+      title: 'Datenschutz',
+      sub: 'Deine Daten gehören dir — vollständig lokal, ohne Server, ohne Tracking.'
+    }
+  };
+
+  const heroTitle = document.getElementById('hero-title');
+  const heroSub = document.getElementById('hero-sub');
+  const heroBadges = document.getElementById('hero-badges');
+
   function showTab(name, updateHash){
+    // 1) Wichtiger, funktionaler Teil — muss immer zuverlässig laufen
     tabsEl.dataset.active = name;
     tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     panels.forEach(p => {
-      const match = p.dataset.panel === name;
-      p.hidden = !match;
-      if(match){
-        p.classList.remove('fade-in');
-        requestAnimationFrame(() => p.classList.add('fade-in'));
-      }
+      p.hidden = p.dataset.panel !== name;
     });
-    if(updateHash){ history.replaceState(null, '', '#' + name); }
+
+    const content = heroContent[name] || heroContent.support;
+    if(heroTitle){ heroTitle.textContent = content.title; }
+    if(heroSub){ heroSub.textContent = content.sub; }
+    if(heroBadges){ heroBadges.hidden = name !== 'privacy'; }
+
     revealCards();
+
+    // 2) Kosmetischer Teil — darf NIEMALS den funktionalen Teil blockieren,
+    //    z.B. weil history.replaceState() auf file:// in manchen Browsern blockiert wird
+    try{
+      const activePanel = document.querySelector('.panel[data-panel="' + name + '"]');
+      if(activePanel){
+        activePanel.classList.remove('fade-in');
+        requestAnimationFrame(() => activePanel.classList.add('fade-in'));
+      }
+    } catch(e){ /* Animation ist optional — Fehler hier ignorieren */ }
+
+    if(updateHash){
+      try{
+        history.replaceState(null, '', '#' + name);
+      } catch(e){ /* manche Browser blockieren das auf file:// — ignorieren */ }
+    }
   }
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => showTab(btn.dataset.tab, true));
   });
 
-  // Initial tab from hash, e.g. #privacy or #support
+  // Initial tab from hash, e.g. #privacy or #support — runs last, after everything above exists
   const initial = (location.hash || '').replace('#', '');
   showTab(initial === 'privacy' ? 'privacy' : 'support', false);
-
-  // Reveal-on-scroll for cards
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  function revealCards(){
-    document.querySelectorAll('.panel:not([hidden]) .card').forEach(card => {
-      observer.observe(card);
-    });
-  }
+})();
 </script>
 
 </body>
