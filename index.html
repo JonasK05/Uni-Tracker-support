@@ -1,33 +1,272 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Support – Uni Tracker</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 0 16px;
-        line-height: 1.6;
-        color: #222;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Uni Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F7F5F0;
+    --paper-raised: #FFFFFF;
+    --ink: #1C2333;
+    --slate: #5C6478;
+    --seal: #A8793A;
+    --forest: #3B6B52;
+    --hairline: #DEDAD0;
+  }
 
-      h1 {
-        margin-bottom: 8px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Uni Tracker Support</h1>
-    <p>Bei Fragen oder Problemen kannst du mich über folgende Kanäle erreichen:</p>
-    <ul>
-      <li>GitHub: <a href="https://github.com/JonasK05">@JonasK05</a></li>
-      <li>
-        Support-Tickets:
-        <a href="https://github.com/JonasK05/Uni-Tracker-support-/issues">GitHub Issues</a>
-      </li>
-    </ul>
-  </body>
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  /* ---------- Header ---------- */
+
+  header{
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out forwards;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    header{ animation: none; opacity: 1; }
+  }
+
+  .eyebrow{
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-bottom: 0.9rem;
+  }
+
+  h1{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle{
+    color: var(--slate);
+    font-size: 1.05rem;
+    margin: 0 0 2.2rem;
+  }
+
+  .signature{
+    display: flex;
+    justify-content: center;
+    margin: 1.6rem 0 2rem;
+  }
+
+  .signature svg{
+    width: 110px;
+    height: auto;
+  }
+
+  .intro{
+    text-align: center;
+    color: var(--ink);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 2.8rem;
+  }
+
+  /* ---------- Contact cards ---------- */
+
+  .contact-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card{
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover{
+    border-color: var(--seal);
+    transform: translateY(-2px);
+  }
+
+  .card-icon{
+    margin-bottom: 1rem;
+  }
+
+  .card-icon svg{
+    width: 30px;
+    height: 30px;
+  }
+
+  .card-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-bottom: 0.5rem;
+  }
+
+  .card h2{
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .card p{
+    color: var(--slate);
+    font-size: 0.9rem;
+    margin: 0 0 1.2rem;
+    flex-grow: 1;
+  }
+
+  .card a{
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1.5px solid var(--seal);
+    padding-bottom: 2px;
+    width: fit-content;
+  }
+
+  .card a:hover{
+    color: var(--seal);
+  }
+
+  .card a:focus-visible{
+    outline: 2px solid var(--seal);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .card a .arrow{
+    transition: transform 0.2s ease;
+  }
+
+  .card a:hover .arrow{
+    transform: translateX(3px);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
+    text-align: center;
+    color: var(--slate);
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 540px){
+    .contact-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px){
+    .wrap{ padding: 3.2rem 1.2rem 3rem; }
+    h1{ font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Support</span>
+    <h1>Uni Tracker</h1>
+    <p class="subtitle">Hilfe und Kontakt</p>
+
+    <div class="signature" aria-hidden="true">
+      <svg viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 12h70a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8H42l-16 14V60H10a8 8 0 0 1-8-8V20a8 8 0 0 1 8-8z"
+              stroke="#1C2333" stroke-width="2.2" stroke-linejoin="round"/>
+        <circle cx="29" cy="36" r="3.4" fill="#A8793A"/>
+        <circle cx="45" cy="36" r="3.4" fill="#A8793A"/>
+        <circle cx="61" cy="36" r="3.4" fill="#A8793A"/>
+      </svg>
+    </div>
+
+    <p class="intro">Bei Fragen oder Problemen kannst du mich über einen der folgenden Kanäle erreichen.</p>
+  </header>
+
+  <div class="contact-grid">
+
+    <div class="card">
+      <div class="card-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#1C2333" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0.3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.6 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 0.3z"/>
+        </svg>
+      </div>
+      <div class="card-label">Profil</div>
+      <h2>@JonasK05</h2>
+      <p>Schreib mir direkt über mein GitHub-Profil.</p>
+      <a href="https://github.com/JonasK05">GitHub-Profil <span class="arrow">→</span></a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1C2333" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 3.5h6a1.5 1.5 0 0 1 1.5 1.5v.5h1A2 2 0 0 1 19.5 7.5v12A2 2 0 0 1 17.5 21.5h-11A2 2 0 0 1 4.5 19.5v-12A2 2 0 0 1 6.5 5.5h1V5A1.5 1.5 0 0 1 9 3.5z"/>
+          <circle cx="9.5" cy="12" r="0.9" fill="#1C2333" stroke="none"/>
+          <line x1="12" y1="12" x2="16" y2="12" stroke-linecap="round"/>
+          <circle cx="9.5" cy="16" r="0.9" fill="#1C2333" stroke="none"/>
+          <line x1="12" y1="16" x2="16" y2="16" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Support-Tickets</div>
+      <h2>GitHub Issues</h2>
+      <p>Melde einen Fehler oder stelle eine Frage zur App.</p>
+      <a href="https://github.com/JonasK05/Uni-Tracker-support-/issues">Issue erstellen <span class="arrow">→</span></a>
+    </div>
+
+  </div>
+
+  <footer>
+    Uni Tracker · Support · Juni 2026
+  </footer>
+
+</div>
+
+</body>
 </html>
