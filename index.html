@@ -3,270 +3,533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Support — Uni Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Uni Tracker — Support & Datenschutz</title>
 <style>
   :root{
-    --paper: #F7F5F0;
-    --paper-raised: #FFFFFF;
-    --ink: #1C2333;
-    --slate: #5C6478;
-    --seal: #A8793A;
-    --forest: #3B6B52;
-    --hairline: #DEDAD0;
+    --bg: #fbfbfd;
+    --surface: #f5f5f7;
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --accent: #0071e3;
+    --border: rgba(0,0,0,0.08);
+    --card-bg: #ffffff;
+
+    --blue: #0071e3;     --blue-bg: rgba(0,113,227,0.10);
+    --purple: #8b5cf6;   --purple-bg: rgba(139,92,246,0.10);
+    --teal: #00b4c6;     --teal-bg: rgba(0,180,198,0.10);
+    --orange: #ff9500;   --orange-bg: rgba(255,149,0,0.10);
+    --red: #ff3b30;      --red-bg: rgba(255,59,48,0.10);
+    --graphite: #1d1d1f; --graphite-bg: rgba(0,0,0,0.06);
   }
 
-  *{ box-sizing: border-box; }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+
+  html{ scroll-behavior: smooth; }
 
   body{
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
-    line-height: 1.65;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap{
-    max-width: 680px;
+  a{ color: var(--accent); text-decoration: none; }
+
+  /* ---------- Nav ---------- */
+
+  .nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.78);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner{
+    max-width: 980px;
     margin: 0 auto;
-    padding: 5rem 1.5rem 4rem;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  /* ---------- Header ---------- */
+  .logo{
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+  }
 
-  header{
+  .tabs{
+    position: relative;
+    display: inline-flex;
+    background: var(--surface);
+    border-radius: 980px;
+    padding: 4px;
+  }
+
+  .tab-indicator{
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: #ffffff;
+    border-radius: 980px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    z-index: 0;
+  }
+
+  .tabs[data-active="privacy"] .tab-indicator{
+    transform: translateX(100%);
+  }
+
+  .tab-btn{
+    position: relative;
+    z-index: 1;
+    border: none;
+    background: transparent;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.45rem 1.1rem;
+    border-radius: 980px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .tab-btn[aria-selected="true"]{
+    color: var(--text);
+  }
+
+  .tab-btn:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 3rem;
     text-align: center;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease-out forwards;
-  }
-
-  @keyframes fadeUp{
-    from{ opacity: 0; transform: translateY(10px); }
-    to{ opacity: 1; transform: translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    header{ animation: none; opacity: 1; }
   }
 
   .eyebrow{
     display: block;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--seal);
+    color: var(--accent);
     margin-bottom: 0.9rem;
   }
 
   h1{
-    font-family: 'Source Serif 4', serif;
-    font-weight: 600;
-    font-size: 2.4rem;
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.01em;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.7rem;
   }
 
-  .subtitle{
-    color: var(--slate);
-    font-size: 1.05rem;
-    margin: 0 0 2.2rem;
+  .hero-sub{
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 540px;
+    margin: 0 auto 1.8rem;
   }
 
-  .signature{
+  .badges{
     display: flex;
     justify-content: center;
-    margin: 1.6rem 0 2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .signature svg{
-    width: 110px;
-    height: auto;
+  .badge{
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--surface);
+    border-radius: 980px;
+    padding: 0.4rem 0.85rem;
   }
 
-  .intro{
+  /* ---------- Panels & Grid ---------- */
+
+  main{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  .panel-meta{
     text-align: center;
-    color: var(--ink);
-    font-size: 1rem;
-    max-width: 480px;
-    margin: 0 auto 2.8rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.8rem;
   }
 
-  /* ---------- Contact cards ---------- */
-
-  .contact-grid{
+  .grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1.1rem;
-    margin-bottom: 1rem;
+  }
+
+  .grid-2{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #panel-support .grid-2{
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 680px){
+    .grid-2{ grid-template-columns: 1fr; }
+    h1{ font-size: 2.1rem; }
+    .hero{ padding: 3.2rem 1.3rem 2.4rem; }
   }
 
   .card{
-    background: var(--paper-raised);
-    border: 1px solid var(--hairline);
-    border-radius: 14px;
-    padding: 1.6rem 1.4rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.7rem;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card.visible{
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .card:hover{
-    border-color: var(--seal);
-    transform: translateY(-2px);
+    border-color: rgba(0,0,0,0.14);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   }
 
-  .card-icon{
-    margin-bottom: 1rem;
+  .icon-tile{
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
   }
 
-  .card-icon svg{
-    width: 30px;
-    height: 30px;
-  }
+  .icon-tile svg{ width: 24px; height: 24px; }
 
-  .card-label{
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--seal);
-    margin-bottom: 0.5rem;
-  }
+  .icon-tile.blue{ background: var(--blue-bg); color: var(--blue); }
+  .icon-tile.purple{ background: var(--purple-bg); color: var(--purple); }
+  .icon-tile.teal{ background: var(--teal-bg); color: var(--teal); }
+  .icon-tile.orange{ background: var(--orange-bg); color: var(--orange); }
+  .icon-tile.red{ background: var(--red-bg); color: var(--red); }
+  .icon-tile.graphite{ background: var(--graphite-bg); color: var(--graphite); }
 
   .card h2{
-    font-family: 'Source Serif 4', serif;
+    font-size: 1.12rem;
     font-weight: 600;
-    font-size: 1.15rem;
-    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.55rem;
   }
 
   .card p{
-    color: var(--slate);
-    font-size: 0.9rem;
-    margin: 0 0 1.2rem;
-    flex-grow: 1;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
   }
 
-  .card a{
-    font-family: 'IBM Plex Sans', sans-serif;
+  .card p + p{ margin-top: 0.6rem; }
+
+  .card .path{
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.7rem;
+  }
+
+  .none-list{
+    list-style: none;
+    margin-top: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .none-list li{
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  .none-list .mark{
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.4px solid var(--text-secondary);
+    position: relative;
+  }
+
+  .none-list .mark::after{
+    content: "";
+    position: absolute;
+    left: 2.5px;
+    right: 2.5px;
+    top: 50%;
+    height: 1.4px;
+    background: var(--text-secondary);
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .card .link-out{
+    margin-top: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--ink);
-    text-decoration: none;
+    color: var(--text);
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    border-bottom: 1.5px solid var(--seal);
-    padding-bottom: 2px;
+    gap: 0.35rem;
     width: fit-content;
   }
 
-  .card a:hover{
-    color: var(--seal);
+  .card .link-out .arrow{ transition: transform 0.2s ease; }
+  .card:hover .link-out .arrow{ transform: translateX(3px); }
+  .card .link-out:hover{ color: var(--accent); }
+
+  /* ---------- Fade for panel switch ---------- */
+
+  @keyframes panelFade{
+    from{ opacity: 0; transform: translateY(8px); }
+    to{ opacity: 1; transform: translateY(0); }
   }
 
-  .card a:focus-visible{
-    outline: 2px solid var(--seal);
-    outline-offset: 4px;
-    border-radius: 2px;
-  }
+  .panel.fade-in{ animation: panelFade 0.4s ease; }
 
-  .card a .arrow{
-    transition: transform 0.2s ease;
-  }
-
-  .card a:hover .arrow{
-    transform: translateX(3px);
+  @media (prefers-reduced-motion: reduce){
+    .card{ opacity: 1; transform: none; transition: none; }
+    .panel.fade-in{ animation: none; }
+    .tab-indicator{ transition: none; }
   }
 
   /* ---------- Footer ---------- */
 
   footer{
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--hairline);
     text-align: center;
-    color: var(--slate);
-    font-size: 0.8rem;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  @media (max-width: 540px){
-    .contact-grid{
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 480px){
-    .wrap{ padding: 3.2rem 1.2rem 3rem; }
-    h1{ font-size: 1.9rem; }
+    padding: 2.2rem 1.5rem 3rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-
-  <header>
-    <span class="eyebrow">Support</span>
-    <h1>Uni Tracker</h1>
-    <p class="subtitle">Hilfe und Kontakt</p>
-
-    <div class="signature" aria-hidden="true">
-      <svg viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 12h70a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8H42l-16 14V60H10a8 8 0 0 1-8-8V20a8 8 0 0 1 8-8z"
-              stroke="#1C2333" stroke-width="2.2" stroke-linejoin="round"/>
-        <circle cx="29" cy="36" r="3.4" fill="#A8793A"/>
-        <circle cx="45" cy="36" r="3.4" fill="#A8793A"/>
-        <circle cx="61" cy="36" r="3.4" fill="#A8793A"/>
-      </svg>
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">Uni Tracker</div>
+    <div class="tabs" id="tabs" data-active="support">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <button class="tab-btn" data-tab="support" role="tab" aria-selected="true">Support</button>
+      <button class="tab-btn" data-tab="privacy" role="tab" aria-selected="false">Datenschutz</button>
     </div>
-
-    <p class="intro">Bei Fragen oder Problemen kannst du mich über einen der folgenden Kanäle erreichen.</p>
-  </header>
-
-  <div class="contact-grid">
-
-    <div class="card">
-      <div class="card-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#1C2333" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0.3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.6 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 0.3z"/>
-        </svg>
-      </div>
-      <div class="card-label">Profil</div>
-      <h2>@JonasK05</h2>
-      <p>Schreib mir direkt über mein GitHub-Profil.</p>
-      <a href="https://github.com/JonasK05">GitHub-Profil <span class="arrow">→</span></a>
-    </div>
-
-    <div class="card">
-      <div class="card-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1C2333" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 3.5h6a1.5 1.5 0 0 1 1.5 1.5v.5h1A2 2 0 0 1 19.5 7.5v12A2 2 0 0 1 17.5 21.5h-11A2 2 0 0 1 4.5 19.5v-12A2 2 0 0 1 6.5 5.5h1V5A1.5 1.5 0 0 1 9 3.5z"/>
-          <circle cx="9.5" cy="12" r="0.9" fill="#1C2333" stroke="none"/>
-          <line x1="12" y1="12" x2="16" y2="12" stroke-linecap="round"/>
-          <circle cx="9.5" cy="16" r="0.9" fill="#1C2333" stroke="none"/>
-          <line x1="12" y1="16" x2="16" y2="16" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="card-label">Support-Tickets</div>
-      <h2>GitHub Issues</h2>
-      <p>Melde einen Fehler oder stelle eine Frage zur App.</p>
-      <a href="https://github.com/JonasK05/Uni-Tracker-support-/issues">Issue erstellen <span class="arrow">→</span></a>
-    </div>
-
   </div>
+</header>
 
-  <footer>
-    Uni Tracker · Support · Juni 2026
-  </footer>
+<section class="hero">
+  <span class="eyebrow">Uni Tracker</span>
+  <h1>Hilfe &amp; Datenschutz</h1>
+  <p class="hero-sub">Alles, was du über Support und den Umgang mit deinen Daten wissen musst — an einem Ort.</p>
+  <div class="badges">
+    <span class="badge">Kein Account</span>
+    <span class="badge">Kein Server</span>
+    <span class="badge">Keine Werbung</span>
+  </div>
+</section>
 
-</div>
+<main>
+
+  <section class="panel fade-in" id="panel-support" data-panel="support">
+    <div class="grid grid-2">
+
+      <div class="card">
+        <div class="icon-tile graphite" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0.3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.6 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 0.3z"/>
+          </svg>
+        </div>
+        <h2>GitHub-Profil</h2>
+        <p>Schreib mir direkt über mein GitHub-Profil, wenn du Fragen hast.</p>
+        <a class="link-out" href="https://github.com/JonasK05">@JonasK05 <span class="arrow">→</span></a>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 3.5h6a1.5 1.5 0 0 1 1.5 1.5v.5h1A2 2 0 0 1 19.5 7.5v12A2 2 0 0 1 17.5 21.5h-11A2 2 0 0 1 4.5 19.5v-12A2 2 0 0 1 6.5 5.5h1V5A1.5 1.5 0 0 1 9 3.5z"/>
+            <circle cx="9.5" cy="12" r="0.9" fill="currentColor" stroke="none"/>
+            <line x1="12" y1="12" x2="16" y2="12" stroke-linecap="round"/>
+            <circle cx="9.5" cy="16" r="0.9" fill="currentColor" stroke="none"/>
+            <line x1="12" y1="16" x2="16" y2="16" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2>Support-Tickets</h2>
+        <p>Melde einen Fehler oder stelle eine Frage zur App über GitHub Issues.</p>
+        <a class="link-out" href="https://github.com/JonasK05/Uni-Tracker-support-/issues">Issue erstellen <span class="arrow">→</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="panel" id="panel-privacy" data-panel="privacy" hidden>
+    <div class="panel-meta">Stand: Juni 2026</div>
+    <div class="grid grid-2">
+
+      <div class="card">
+        <div class="icon-tile blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/>
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Übersicht</h2>
+        <p>Uni Tracker wurde so entwickelt, dass deine Daten ausschließlich bei dir bleiben. Kein Account, keine Registrierung, keine Verbindung zu externen Servern.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile purple" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="7" y="2" width="10" height="20" rx="2.2"/>
+            <line x1="10.3" y1="18.4" x2="13.7" y2="18.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2>Speicherung</h2>
+        <p>Prüfungen, Noten, ECTS-Punkte, Modulgruppen und Einstellungen werden ausschließlich lokal auf deinem Gerät gespeichert. Der Entwickler hat keinen Zugriff darauf.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile teal" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 18a4 4 0 0 1-1-7.9 5 5 0 0 1 9.6-1.6A4.5 4.5 0 0 1 17 18H7z"/>
+          </svg>
+        </div>
+        <h2>iCloud-Synchronisation</h2>
+        <p>Bist du mit deiner Apple ID angemeldet und iCloud aktiviert, synchronisiert die App deine Daten verschlüsselt zwischen deinen Geräten. Der Entwickler hat auch hier keinen Zugriff.</p>
+        <span class="path">Einstellungen → [Name] → iCloud → Uni Tracker</span>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile orange" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 17h12l-1.5-2V10a4.5 4.5 0 0 0-9 0v5L6 17z"/>
+            <path d="M10 20a2 2 0 0 0 4 0"/>
+          </svg>
+        </div>
+        <h2>Benachrichtigungen</h2>
+        <p>Prüfungserinnerungen werden vollständig auf deinem Gerät erstellt und versendet. Es gibt keinen externen Push-Server — deine Daten verlassen dabei dein Gerät nicht.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile red" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12c2-4 5.5-6 9-6s7 2 9 6c-2 4-5.5 6-9 6s-7-2-9-6z"/>
+            <line x1="4" y1="20" x2="20" y2="4"/>
+          </svg>
+        </div>
+        <h2>Keine Weitergabe</h2>
+        <p>Keine Analyse-Tools, keine Werbenetzwerke, keine Drittanbieter-Dienste. Es werden keinerlei Nutzungsdaten erhoben oder weitergegeben.</p>
+        <ul class="none-list">
+          <li><span class="mark"></span> Analyse-Tools</li>
+          <li><span class="mark"></span> Werbenetzwerke</li>
+          <li><span class="mark"></span> Drittanbieter-Dienste</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="icon-tile graphite" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 7h14"/>
+            <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            <path d="M7 7l1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/>
+            <line x1="10" y1="11" x2="10" y2="17"/>
+            <line x1="14" y1="11" x2="14" y2="17"/>
+          </svg>
+        </div>
+        <h2>Löschen deiner Daten</h2>
+        <p>Du kannst einzelne Einträge jederzeit direkt in der App löschen. Alle Daten werden vollständig entfernt, wenn du die App deinstallierst.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Uni Tracker · Support &amp; Datenschutz · Juni 2026
+</footer>
+
+<script>
+  const tabsEl = document.getElementById('tabs');
+  const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+  const panels = Array.from(document.querySelectorAll('.panel'));
+
+  function showTab(name, updateHash){
+    tabsEl.dataset.active = name;
+    tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+    panels.forEach(p => {
+      const match = p.dataset.panel === name;
+      p.hidden = !match;
+      if(match){
+        p.classList.remove('fade-in');
+        requestAnimationFrame(() => p.classList.add('fade-in'));
+      }
+    });
+    if(updateHash){ history.replaceState(null, '', '#' + name); }
+    revealCards();
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => showTab(btn.dataset.tab, true));
+  });
+
+  // Initial tab from hash, e.g. #privacy or #support
+  const initial = (location.hash || '').replace('#', '');
+  showTab(initial === 'privacy' ? 'privacy' : 'support', false);
+
+  // Reveal-on-scroll for cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  function revealCards(){
+    document.querySelectorAll('.panel:not([hidden]) .card').forEach(card => {
+      observer.observe(card);
+    });
+  }
+</script>
 
 </body>
 </html>
